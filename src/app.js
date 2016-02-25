@@ -47,10 +47,9 @@ app.post('/', function (request, response) {
 		question: question
 	}).then(function (poll) {
 		Promise.all(answers.map(function (answer) {
-			return Answer.create({
+			return poll.createAnswer({
 				name: answer.name,
-				votes: 0,
-				pollId: poll.id
+				votes: 0
 			});
 		})).then(function () {
 			response.redirect('/' + poll.id);
